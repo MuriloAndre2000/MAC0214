@@ -80,12 +80,10 @@ class Time_Travel_Camera(Entity):
     def input(self,key):
         if key == 'q':
             self.y += 200
-            print("aaa")
-            self.position = (0,6,-8)
+            #self.position = (0,6,-8)
             print(self.get_position())
         if key == 'e':
             self.y -= 200
-            print("bbb")
 
 
 
