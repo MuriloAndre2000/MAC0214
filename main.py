@@ -59,8 +59,10 @@ if __name__ == '__main__':
     ground = Entity(model='plane', scale=(10,1,10), color=color.blue.tint(-.2), texture='white_cube',position = (0,0,-200), texture_scale=(100,100), collider='box')
     ground = Entity(model='plane', scale=(10,1,10), color=color.yellow.tint(-.2), texture='white_cube',position = (0,0,200), texture_scale=(100,100), collider='box')
     #print(dir(ground))
-    box = Entity(model='Cube_obj', scale=(10,10,10),
-        position = (2,1,1), texture_scale=(100,100), collider='box')
+    box = Entity(model='plane', scale=(1,1,1),
+        position = (1,1,1), texture_scale=(100,100), collider='box')
+    box = Entity(model='plane', scale=(1,1,1),
+        position = (1,1.3,2.2), texture_scale=(100,100), collider='box')
     camera.position = Vec3(-8,6,0)
 
     player = Player(model='hourglass', scale=(0.01,0.01,0.01), position = (0,1,0), collider='box', color=color.gray.tint(-.2))
