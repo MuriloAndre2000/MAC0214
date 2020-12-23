@@ -63,6 +63,8 @@ if __name__ == '__main__':
         position = (1,1,1), texture_scale=(100,100), collider='box')
     box = Entity(model='plane', scale=(1,1,1),
         position = (1,1.3,2.2), texture_scale=(100,100), collider='box')
+    platform = Entity(model='plane', scale=(1,1,1),
+        position = (1.5,1.4,204), texture_scale=(100,100), collider='box')
     camera.position = Vec3(-8,6,0)
 
     player = Player(model='hourglass', scale=(0.01,0.01,0.01), position = (0,1,0), collider='box', color=color.gray.tint(-.2))
