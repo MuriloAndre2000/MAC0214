@@ -25,23 +25,24 @@ if __name__ == '__main__':
             print(camera.getQuat())
 
     def update():
-        #if  player.world_x - camera.world_x != 8:
-        #    camera.x = player.world_x - 8
-        #if  player.world_z - camera.world_z != 0:
-        #    camera.z = player.world_z 
-        #print(camera.position, player.position)
+        #define variables
         player_speed = 2.5
+        #angle of camera to player
         sin = (camera.x-player.world_x)/8
         cos = (camera.z-player.world_z)/8
         angle_horizontal = math.degrees(math.atan2(sin,cos))
+        #player rotate the camera by the player in horizontal way
         angle_horizontal += held_keys['l']* time.dt *50
         angle_horizontal -= held_keys['j']* time.dt *50
         angle_horizontal = math.radians(angle_horizontal)
+        #define camera position by angle
         camera.x = player.world_x + 8*math.sin(angle_horizontal)
         camera.z = player.world_z + 8*math.cos(angle_horizontal)
-        #print((player.world_position - camera.world_position).x, (player.world_position - camera.world_position).z)
+        #define vector of player-camera and get x and z
         vector_x = (player.world_position - camera.world_position).x
         vector_z = (player.world_position - camera.world_position).z
+        #the moviment is a mix of x and z, in this way the player when press w
+        #will move as 3 person
         if held_keys['w']:
             time_held = held_keys['w'] * time.dt
             player.world_x += time_held * player_speed * vector_x/8
@@ -66,22 +67,6 @@ if __name__ == '__main__':
             player.world_z += time_held * player_speed * vector_x/8
             camera.x -= time_held * player_speed * vector_z/8
             camera.z += time_held * player_speed * vector_x/8
-
-        #if held_keys['d']:
-        #    self.z -= held_keys['d'] * time.dt * self.speed
-        #if held_keys['a']:
-        #    self.z += held_keys['a'] * time.dt * self.speed
-        #if held_keys['w']:
-        #    self.x += held_keys['w'] * time.dt * self.speed
-        #if held_keys['s']:
-        #    self.x -= held_keys['s'] * time.dt * self.speed
-        #sin = (camera.y-player.world_y)/6
-        #cos = (camera.x-player.world_x)/6
-        #angle_vertical = math.degrees(math.atan2(sin,cos))
-        #angle_vertical += held_keys['i']* time.dt *50
-        #angle_vertical -= held_keys['k']* time.dt *50
-        #angle_vertical = math.radians(angle_vertical)
-        #camera.y = player.world_y + 6*math.sin(angle_vertical)
         camera.look_at(player, axis='forward')
     #app.camera = Time_Travel_Camera()
     Sky(color=color.white)
