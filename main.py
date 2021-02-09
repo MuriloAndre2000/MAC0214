@@ -3,6 +3,7 @@ from Game_camera import Time_Travel_Camera
 import time
 import math
 from Player import Player
+import numpy as np
 import json
 
 time_S_to_wait = 0
@@ -29,6 +30,7 @@ if __name__ == '__main__':
         #if  player.world_z - camera.world_z != 0:
         #    camera.z = player.world_z 
         #print(camera.position, player.position)
+        player_speed = 2.5
         sin = (camera.x-player.world_x)/8
         cos = (camera.z-player.world_z)/8
         angle_horizontal = math.degrees(math.atan2(sin,cos))
@@ -37,6 +39,42 @@ if __name__ == '__main__':
         angle_horizontal = math.radians(angle_horizontal)
         camera.x = player.world_x + 8*math.sin(angle_horizontal)
         camera.z = player.world_z + 8*math.cos(angle_horizontal)
+        #print((player.world_position - camera.world_position).x, (player.world_position - camera.world_position).z)
+        vector_x = (player.world_position - camera.world_position).x
+        vector_z = (player.world_position - camera.world_position).z
+        if held_keys['w']:
+            time_held = held_keys['w'] * time.dt
+            player.world_x += time_held * player_speed * vector_x/8
+            player.world_z += time_held * player_speed * vector_z/8
+            camera.x += time_held * player_speed * vector_x/8
+            camera.z += time_held * player_speed * vector_z/8
+        if held_keys['s']:
+            time_held = held_keys['s'] * time.dt
+            player.world_x -= time_held * player_speed * vector_x/8
+            player.world_z -= time_held * player_speed * vector_z/8
+            camera.x -= time_held * player_speed * vector_x/8
+            camera.z -= time_held * player_speed * vector_z/8
+        if held_keys['d']:
+            time_held = held_keys['d'] * time.dt
+            player.world_x += time_held * player_speed * vector_z/8
+            player.world_z -= time_held * player_speed * vector_x/8
+            camera.x += time_held * player_speed * vector_z/8
+            camera.z -= time_held * player_speed * vector_x/8
+        if held_keys['a']:
+            time_held = held_keys['a'] * time.dt
+            player.world_x -= time_held * player_speed * vector_z/8
+            player.world_z += time_held * player_speed * vector_x/8
+            camera.x -= time_held * player_speed * vector_z/8
+            camera.z += time_held * player_speed * vector_x/8
+
+        #if held_keys['d']:
+        #    self.z -= held_keys['d'] * time.dt * self.speed
+        #if held_keys['a']:
+        #    self.z += held_keys['a'] * time.dt * self.speed
+        #if held_keys['w']:
+        #    self.x += held_keys['w'] * time.dt * self.speed
+        #if held_keys['s']:
+        #    self.x -= held_keys['s'] * time.dt * self.speed
         #sin = (camera.y-player.world_y)/6
         #cos = (camera.x-player.world_x)/6
         #angle_vertical = math.degrees(math.atan2(sin,cos))

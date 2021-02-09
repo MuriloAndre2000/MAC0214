@@ -31,14 +31,6 @@ class Player(Entity):
         for d in ['plane1', 'plane2', 'plane3']:
             if self.z <= data[d]['z'][1] and self.z >= data[d]['z'][0]:
                 current_plane = data[d]
-        if self.z + 0.08 > current_plane['z'][0]:
-            self.z -= held_keys['d'] * time.dt * self.speed
-        if self.z - 0.08 < current_plane['z'][1]:
-            self.z += held_keys['a'] * time.dt * self.speed
-        if self.x - 0.08 < current_plane['x'][1]:
-            self.x += held_keys['w'] * time.dt * self.speed
-        if self.x + 0.08 > current_plane['x'][0]:
-            self.x -= held_keys['s'] * time.dt * self.speed
         for d in data:
             if self.z <= data[d]['z'][1] and self.z >= data[d]['z'][0] and self.x <= data[d]['x'][1] and self.x >= data[d]['x'][0]:
                 height = data[d]['y'][0]
