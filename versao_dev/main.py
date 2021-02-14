@@ -57,9 +57,9 @@ if __name__ == '__main__':
         #the moviment is a mix of x and z, in this way the player when press w
         #will move as 3 person
         if held_keys['w']:
-            direction = Vec3(vector_x,10,vector_z).normalized()
-            middle_ray_x = raycast(player.world_x, direction, distance=.25, debug=False)
-            middle_ray_z = raycast(player.world_z, direction, distance=.25, debug=False)
+            direction = Vec3(vector_x,0,vector_z).normalized()
+            middle_ray_x = raycast(player.world_x, direction, distance=.05, debug=False)
+            middle_ray_z = raycast(player.world_z, direction, distance=.05, debug=False)
             if middle_ray_x.hit == False and middle_ray_z.hit == False:
                 time_held = held_keys['w'] * time.dt
                 player.world_x += time_held * player_speed * vector_x/radius_horizontal

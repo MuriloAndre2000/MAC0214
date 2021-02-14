@@ -19,16 +19,17 @@ if __name__ == '__main__':
         if key == 'e':
             if camera.z> - 150:
                 camera.z -= 200
+        if key == 'space':
+            player.jumping = True
+            player.speed_jump =10
         if key == 'z':
-            print(player.world_x, player.world_y, player.world_z)
-            print(camera.getQuat())
+            mouse.locked = False
 
     def update():
         #define variables
         player_speed = 2.5
         radius_horizontal = 8
         mouse_sensibility = 200
-        print(camera.y)
         radius_horizontal = math.sqrt(15**2 - (camera.y*camera.y))
         #angle of camera to player
         sin_horizontal = (camera.x-player.world_x)/radius_horizontal
@@ -48,7 +49,7 @@ if __name__ == '__main__':
         camera.x = player.world_x + radius_horizontal*math.sin(angle_horizontal)
         camera.z = player.world_z + radius_horizontal*math.cos(angle_horizontal)
         if radius_horizontal*math.tan(angle_vertical) < 15:
-            if radius_horizontal*math.tan(angle_vertical) > 3:
+            if radius_horizontal*math.tan(angle_vertical) > -1:
                 camera.y = radius_horizontal*math.tan(angle_vertical)
         #define vector of player-camera and get x and z
         vector_x = (player.world_position - camera.world_position).x
@@ -56,11 +57,15 @@ if __name__ == '__main__':
         #the moviment is a mix of x and z, in this way the player when press w
         #will move as 3 person
         if held_keys['w']:
-            time_held = held_keys['w'] * time.dt
-            player.world_x += time_held * player_speed * vector_x/radius_horizontal
-            player.world_z += time_held * player_speed * vector_z/radius_horizontal
-            camera.x += time_held * player_speed * vector_x/radius_horizontal
-            camera.z += time_held * player_speed * vector_z/radius_horizontal
+            direction = Vec3(vector_x,0,vector_z).normalized()
+            middle_ray_x = raycast(player.world_x, direction, distance=.05, debug=False)
+            middle_ray_z = raycast(player.world_z, direction, distance=.05, debug=False)
+            if middle_ray_x.hit == False and middle_ray_z.hit == False:
+                time_held = held_keys['w'] * time.dt
+                player.world_x += time_held * player_speed * vector_x/radius_horizontal
+                player.world_z += time_held * player_speed * vector_z/radius_horizontal
+                camera.x += time_held * player_speed * vector_x/radius_horizontal
+                camera.z += time_held * player_speed * vector_z/radius_horizontal
         if held_keys['s']:
             time_held = held_keys['s'] * time.dt
             player.world_x -= time_held * player_speed * vector_x/radius_horizontal
@@ -79,26 +84,43 @@ if __name__ == '__main__':
             player.world_z += time_held * player_speed * vector_x/radius_horizontal
             camera.x -= time_held * player_speed * vector_z/radius_horizontal
             camera.z += time_held * player_speed * vector_x/radius_horizontal
+        direction = Vec3(0,-1,0).normalized()
+        middle_ray = raycast(player.world_y , direction, distance=.5, debug=False)
+        if player.jumping:
+            player.world_y = player.world_y + player.speed_jump*time.dt
+            player.speed_jump = player.speed_jump - 24*time.dt
+        if middle_ray.hit:
+                player.jumping = False
+        else:
+            player.world_y = player.world_y - 24*time.dt*time.dt/2
         camera.look_at(player, axis='forward')
     #app.camera = Time_Travel_Camera()
     Sky(color=color.white)
     mouse.locked = True
-    print(dir(mouse))
     window.fullscreen = True 
-    ground = Entity(model='models/terrain_simple', scale=(1,1,1), texture = 'models/texture/dirt')
-    stone = Entity(model='models/stone1', scale=(.05,.05,.05), position =(3.5,1,3), texture = 'models/texture/stone')
+    with open('data.json','r') as f:
+        data = json.load(f) 
+    distance = .35641
+    for texture in data:
+        objs = data[texture]
+        for obj in objs:
+            row = objs[obj]
+            ground = Entity(model='models/block', scale=(.2,.2,.2), position = (row['x']*distance,row['y']*distance,row['z']*distance),
+                texture = 'models/texture/'+texture, collider = 'box')
+            ground.collider.visible = True
+
+
+    print(data) 
+    ground = Entity(model='models/block', scale=(.2,.2,.2), texture = 'models/texture/block_base', collider = 'box')
+    ground = Entity(model='models/block', scale=(.2,.2,.2),position = (0,0,0.34641), texture = 'models/texture/block_base', collider = 'box')
+    print(ground.getBounds())
     ground = Entity(model='plane', scale=(10,1,10), color=color.blue.tint(-.2), texture='white_cube',position = (0,0,-200), texture_scale=(100,100), collider='box')
     ground = Entity(model='plane', scale=(10,1,10), color=color.yellow.tint(-.2), texture='white_cube',position = (0,0,200), texture_scale=(100,100), collider='box')
-    #print(dir(ground))
-    box = Entity(model='plane', scale=(1,1,1),
-        position = (1,1,1), texture_scale=(100,100), collider='box')
-    box = Entity(model='plane', scale=(1,1,1),
-        position = (1,1.3,2.2), texture_scale=(100,100), collider='box')
-    platform = Entity(model='plane', scale=(1,1,1),
-        position = (1.5,1.4,204), texture_scale=(100,100), collider='box')
+
     camera.position = Vec3(-8,6,0)
 
-    player = Player(model='hourglass', scale=(0.01,0.01,0.01), position = (0,1,0), collider='box', color=color.gray.tint(-.2))
+    player = Player(model='hourglass', scale=(0.01,0.01,0.01), position = (0,3,0), collider='box', color=color.gray.tint(-.2))
+    player.collider.visible = True
     camera.look_at(player, axis='forward')
     box2 = Entity(model='cube', position = (2,200,1), texture_scale=(100,100), collider='box')
 
