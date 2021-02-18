@@ -13,12 +13,5 @@ class Player(Entity):
 
         for key, value in kwargs.items():
             setattr(self, key, value)
-    def input(self, key):
-        if key == 'q':
-            if self.z<150:
-                self.z += 200
-        if key == 'e':
-            if self.z> - 150:
-                self.z -= 200
 
         
