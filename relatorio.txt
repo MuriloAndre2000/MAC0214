@@ -1,0 +1,60 @@
+Setembro
+Foram gastos 25 horas para o jogo:
+Estudo dos docs da engine Usina: 5 horas
+Criação da Prova de Conceito: 20 horas
+-Consistindo em inicialização do mundo, pulos temporais
+
+Outubro
+
+Total 39 horas:
+Implementação de Pulo: 4 horas
+Implementação de camera em movimento: 8 horas
+Estudos sobre teoria de jogos : 27 horas
+- Rules of Play: Game Design Fundamentals
+- https://www.youtube.com/user/McBacon1337
+
+Novembro
+
+Total 32 horas:
+Tempo para familiares testarem o jogo e estudar feedback : 4 horas
+Arrumar bugs: 3 horas
+Criação de arte e busca por artes : 11 horas
+Desenvolvimento de colliders para o Ursina : 14 horas
+
+Dezembro
+
+Total 23 horas:
+Criação de história ao longo dos meses : 10 horas ao todo
+Finalizando a primeira fase : 13 horas
+
+Janeiro:
+Total 9 horas:
+Planejamento de estruturação e formação do que fazer no jogo : 3 horas
+Arrumar códigos : 2 horas
+Aprendizado de modelagem 3d: 4 horas
+
+Fevereiro:
+Total 78 horas
+Movimentação da camera em 3a pessoa: 15 horas
+Movimentação do personagem com relação a camera: 8 horas
+Resolver pequenos bugs(MUITOS): 20 horas
+Desenvolvimento com blender : 7 horas
+Conversas com o guilherme: 4 horas
+Estudo de jogo e coleção de feedbacks :  12 horas
+Finalização de relatorio e planejamento do futuro após MAC214 : 12 horas
+
+Resultados e discussões *
+O objetivo do jogo era ter um jogo divertido, que possa ser jogado por várias pessoas e seja uma experiência recompensante, além de aprender mais sobre desenvolvimento de jogos e trazer para o grupo do usp game dev conhecimento de tudo o que eu aprendi.
+Pelo fato que eu subestimei o desenvolvimento de um jogo, além de simplesmente programar, pensar em cada aspecto de um jogo como simplesmente como a camêra do jogo seria colocada e seu movimento para garantir melhor experiência ao jogador, foram gastos horas em mostrando o jogo para meus familiares e minha namorada e tentar entender diferentes cameras, quais ficam mais divertidas e intuitivas para jogar.
+Além disso, a escolha da engine (a Ursina), por ser uma engine low level, senti muito mais liberdade para implementar e alterar tempo de atualização do que engines mais potentes e com mais abstrações (Unity, Unreal Engine, Godot e outras). Ao trabalhar com essa engine open source, encontrei problemas com colliders em objetos 3d que tinha bugs ao trabalhar com uma suposta gravidade. Então entrei em contato com top commiters do git, já estou analisando o código e implementar minhas melhorias para a engine, além de um DOCS em português.
+
+Por si após a recuperação nessa matéria, por estar em férias eu pude dedicar meu tempo ao jogo, entender pequenos detalhes de o que leva um jogo a ser legal e gastar horas aperfeiçoando pequenos detalhes, como movimentação do personagem, por si é sempre algo meio díficil pela dificuldade de aumentar um pouco, testar e alterar se ficou muito rápido.
+Há uma dificuldade de fazer algo novo, tentar até encontrar algo e depois ter que pivotar a movimentação, parece que o final do desenvolvimento está sempre a anos luz de você, mas mesmo que algo não de muito certo, valeu a tentativa não ter dado certo, porque é uma em um milhão de coisas a menos para o seu jogo
+
+Considerações finais *
+
+O projeto que me inscrevi quando entrei foi a tentativa de ver se eu realmente gosto de trabalhar com desenvolvimento de jogos, no começo pareceu fantástico e depois perdi um pouco da mágica, mas a volta agora em 2021, me fez entender as possibilidades, o que consigo atingir e quero me tornar um desenvolvedor de jogos daqui uns anos, mesmo que por hobby.
+
+Pra mim nesses ultimos meses foram parar de subestimar o desenvolvimento de jogos, entender a dificuldade e gastar horas e horas calculando pequenas formulas de trigonometria e um espaço 3d. Agradeço muito por todo o aprendizado que a matéria me trouxe, nem apenas sobre programação, gestão do tempo ou criação de um jogo mas sim entender o papel de uma faculdade e sua capacidade de explorar algo em nós mesmos, estudar e alcançar um estado da arte legal.
+
+Muito obrigado! 
